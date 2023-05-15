@@ -1,0 +1,44 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class RupeeToUSDConverter extends JFrame implements ActionListener {
+   JLabel labelRupee, labelUSD;
+   JTextField textRupee, textUSD;
+   JButton buttonConvert;
+
+   public RupeeToUSDConverter() {
+      setTitle("Rupee to USD Converter");
+      setSize(300, 200);
+      setLayout(new GridLayout(3, 2));
+      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+      labelRupee = new JLabel("Rupee:");
+      textRupee = new JTextField(10);
+      labelUSD = new JLabel("USD:");
+      textUSD = new JTextField(10);
+      textUSD.setEditable(false);
+
+      buttonConvert = new JButton("Convert");
+      buttonConvert.addActionListener(this);
+
+      add(labelRupee);
+      add(textRupee);
+      add(labelUSD);
+      add(textUSD);
+      add(buttonConvert);
+   }
+
+   public void actionPerformed(ActionEvent e) {
+      if (e.getSource() == buttonConvert) {
+         double rupee = Double.parseDouble(textRupee.getText());
+         double usd = rupee * 0.014; // conversion rate as of May 14, 2023
+         textUSD.setText(String.format("%.2f", usd));
+      }
+   }
+
+   public static void main(String[] args) {
+      RupeeToUSDConverter converter = new RupeeToUSDConverter();
+      converter.setVisible(true);
+   }
+}
